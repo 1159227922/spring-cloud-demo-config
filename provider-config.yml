@@ -72,7 +72,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream , bus-refresh        
+        include: bus-refresh , hystrix.stream        
 #  暴露触发消息总线的地址 bus-refresh
        
 
