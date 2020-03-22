@@ -1,0 +1,136 @@
+#注意：如果在记事本上编写，下面的缩进不要使用Tab来缩进，不然报错
+spring:
+  profiles:
+    active: dev # 激活开发环境配置
+
+---
+#开发环境
+server:
+  port: 8001
+  servlet:
+      context-path: /
+
+# mybatis日志配置
+logging:
+  level:
+    com.demo.springcloud.provider.mapper: DEBUG
+    root: info
+    org.mybatis: debug
+    java.sql: debug
+    org.springframework.web: trace
+
+  ##默认数据源配置
+  #注意url一定要有&nullCatalogMeansCurrent=true，否则无法生成delete,update,select等方法。
+spring:
+  profiles: dev #开发环境
+  application:
+    name: microservice-provider #这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_lian_cms?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&nullCatalogMeansCurrent=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#mybatis
+mybatis:
+  type-aliases-package: com.demo.springcloud.api.entity
+  mapperLocations: classpath:mapper/*.xml
+
+  #mapper
+  #mappers 多个接口时逗号隔开
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  not-empty: false
+  identity: MYSQL
+
+  #pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count\=countSql
+
+
+eureka:
+  client:
+    registerWithEureka: true # 服务注册开关
+    fetchRegistry: true # 服务发现开关
+    serviceUrl: # 注册到哪一个Eureka Server服务注册中心，多个中间用逗号分隔
+      #defaultZone: http://localhost:6001/eureka
+      defaultZone: http://eureka6001.com:6001/eureka,http://eureka6002.com:6002/eureka
+  instance:
+    instanceId: ${spring.application.name}:${server.port} # 等价于microservice-provider:8001
+    prefer-ip-address: true #访问路径就会显示成IP地址
+
+# 在被监控服务上添加暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+---
+#生产环境
+server:
+  port: 8001
+  servlet:
+    context-path: /
+
+# mybatis日志配置
+logging:
+  level:
+    com.demo.springcloud.provider.mapper: DEBUG
+    root: info
+    org.mybatis: debug
+    java.sql: debug
+    org.springframework.web: trace
+
+  ##默认数据源配置
+  #注意url一定要有&nullCatalogMeansCurrent=true，否则无法生成delete,update,select等方法。
+spring:
+  profiles: prod #生产环境
+  application:
+    name: microservice-provider #这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_lian_cms?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&nullCatalogMeansCurrent=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#mybatis
+mybatis:
+  type-aliases-package: com.demo.springcloud.api.entity
+  mapperLocations: classpath:mapper/*.xml
+
+  #mapper
+  #mappers 多个接口时逗号隔开
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  not-empty: false
+  identity: MYSQL
+
+  #pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count\=countSql
+
+
+eureka:
+  client:
+    registerWithEureka: true # 服务注册开关
+    fetchRegistry: true # 服务发现开关
+    serviceUrl: # 注册到哪一个Eureka Server服务注册中心，多个中间用逗号分隔
+      #defaultZone: http://localhost:6001/eureka
+      defaultZone: http://eureka6001.com:6001/eureka,http://eureka6002.com:6002/eureka
+  instance:
+    instanceId: ${spring.application.name}:${server.port} # 等价于microservice-provider:8001
+    prefer-ip-address: true #访问路径就会显示成IP地址
+
+# 在被监控服务上添加暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
