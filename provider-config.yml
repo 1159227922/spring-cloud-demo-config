@@ -30,6 +30,11 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq: #Spring cloud Bus消息总线组件的rabbitMQ配置
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest    
 
 #mybatis
 mybatis:
@@ -67,7 +72,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: hystrix.stream,bus-refresh        
+#  暴露触发消息总线的地址 bus-refresh
+       
 
 ---
 #生产环境
@@ -96,6 +103,11 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq: #Spring cloud Bus消息总线组件的rabbitMQ配置
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest    
 
 #mybatis
 mybatis:
@@ -133,4 +145,5 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: hystrix.stream,bus-refresh        
+#  暴露触发消息总线的地址 bus-refresh
