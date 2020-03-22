@@ -76,7 +76,7 @@ management:
         
 #  用于测试动态刷新config值
 emp:
-  name: zackrydev
+  name: zackrydev111
 
 ---
 #生产环境
