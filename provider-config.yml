@@ -31,17 +31,17 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-  rabbitmq: #Spring cloud Bus消息总线组件的rabbitMQ配置
+  rabbitmq: #Spring cloud Bus消息总线组件的rabbitMQ配置（用于动态刷新config和zipkin数据传输）
     host: localhost
     port: 5672
     username: guest
     password: guest    
   zipkin:
-    base-url: http://localhost:9441/  # zipkin服务器的地址
+    base-url: http://localhost:9411/  # zipkin服务器的地址
     # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
     sender:
-      type: rabbit  # web 参数 设置使用http的方式传输数据
+      type: rabbit  # web 参数 设置使用http的方式传输数据；rabbit参数设置使用rabbitmq的方式传输数据
   sleuth:
 #    web:
 #      client:
@@ -122,7 +122,19 @@ spring:
     host: localhost
     port: 5672
     username: guest
-    password: guest    
+    password: guest 
+  zipkin:
+    base-url: http://localhost:9411/  # zipkin服务器的地址
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    sender:
+      type: rabbit  # web 参数 设置使用http的方式传输数据；rabbit参数设置使用rabbitmq的方式传输数据
+  sleuth:
+#    web:
+#      client:
+#        enabled: true   #不用设置，意义未知
+    sampler:
+      probability: 1  # 设置抽样采集率为100%，默认为0.1，即10%        
 
 #mybatis
 mybatis:
