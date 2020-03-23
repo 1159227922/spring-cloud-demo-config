@@ -118,7 +118,7 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-  rabbitmq: #Spring cloud Bus消息总线组件的rabbitMQ配置
+  rabbitmq: #Spring cloud Bus消息总线组件的rabbitMQ配置（用于动态刷新config和zipkin数据传输）
     host: localhost
     port: 5672
     username: guest
