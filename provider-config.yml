@@ -41,11 +41,11 @@ spring:
     # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
     sender:
-      type: web  # web 参数 设置使用http的方式传输数据
+      type: rabbit  # web 参数 设置使用http的方式传输数据
   sleuth:
-    web:
-      client:
-        enabled: true  
+#    web:
+#      client:
+#        enabled: true   #不用设置，意义未知
     sampler:
       probability: 1  # 设置抽样采集率为100%，默认为0.1，即10%    
 
