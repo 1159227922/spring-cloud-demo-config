@@ -41,7 +41,7 @@ spring:
     # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
     sender:
-      type: rabbit  # web 参数 设置使用http的方式传输数据
+      type: web  # web 参数 设置使用http的方式传输数据
   sleuth:
     web:
       client:
