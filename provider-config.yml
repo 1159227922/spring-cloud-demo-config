@@ -43,6 +43,9 @@ spring:
     sender:
       type: web  # 设置使用http的方式传输数据
   sleuth:
+    web:
+      client:
+        enabled: true  
     sampler:
       probability: 1  # 设置抽样采集率为100%，默认为0.1，即10%    
 
