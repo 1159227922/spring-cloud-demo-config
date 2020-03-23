@@ -18,7 +18,7 @@ logging:
     org.mybatis: debug
     java.sql: debug
     org.springframework.web: trace
-    org.springframework.cloud.sleuth: debug
+    #org.springframework.cloud.sleuth: debug
 
   ##默认数据源配置
   #注意url一定要有&nullCatalogMeansCurrent=true，否则无法生成delete,update,select等方法。
